@@ -8,7 +8,7 @@ truncation limits, and there is no feedback loop. skillvet turns skill
 authoring from guesswork into engineering.
 
 ```
-pip install skillvet-cli      # or: uvx skillvet-cli <cmd>  (zero install)
+pip install skill-inspect     # or: uvx skill-inspect <cmd>  (zero install)
 ```
 
 ## Why not skillcheck / skillbench?

@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "skillvet-cli"
+name = "skill-inspect"
 version = "0.1.0"
 description = "Scaffold, validate, lint and test agent skills (SKILL.md) — like unit tests for your skill descriptions."
 readme = "README.md"
