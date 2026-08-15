@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from rich import box
 from rich.console import Console
 from rich.table import Table
 
@@ -9,6 +10,9 @@ from .issues import Issue, Level
 from .tester import TestReport
 
 console = Console()
+
+# Academic three-line table: top rule, header separator, bottom rule, no verticals.
+TABLE_BOX = box.SIMPLE_HEAD
 
 _LEVEL_STYLE = {
     Level.ERROR: "bold red",
@@ -26,7 +30,7 @@ def render_issues(results: dict[str, list[Issue]]) -> int:
         console.print("[bold green]✓ all checks passed[/]")
         return 0
 
-    table = Table(show_lines=False)
+    table = Table(box=TABLE_BOX, show_lines=False, pad_edge=False)
     table.add_column("skill", style="bold")
     table.add_column("level")
     table.add_column("rule", style="dim")
@@ -45,7 +49,7 @@ def render_issues(results: dict[str, list[Issue]]) -> int:
 
 
 def render_test_report(report: TestReport) -> int:
-    table = Table(title=f"{report.skill_name} — trigger test report")
+    table = Table(box=TABLE_BOX, title=f"{report.skill_name} — trigger test report", pad_edge=False)
     table.add_column("input")
     table.add_column("expected")
     table.add_column("router chose")
