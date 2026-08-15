@@ -117,7 +117,7 @@ A ready-made GitHub Action is on the roadmap — PRs welcome.
 ## Development
 
 ```
-git clone https://github.com/lfnfromchina-bot/skillvet && cd skillvet
+git clone https://github.com/lfnfromchina-bot/skilldoctor && cd skilldoctor
 pip install -e '.[dev]'
 pytest
 ```

@@ -31,7 +31,7 @@ dependencies = [
 dev = ["pytest>=8"]
 
 [project.urls]
-Homepage = "https://github.com/lfnfromchina-bot/skillvet"
+Homepage = "https://github.com/lfnfromchina-bot/skilldoctor"
 
 [project.scripts]
 skillvet = "skillvet.cli:app"
