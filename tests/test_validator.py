@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from skilldoctor.issues import Level
-from skilldoctor.validator import validate_path, validate_skill
+from skillvet.issues import Level
+from skillvet.validator import validate_path, validate_skill
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

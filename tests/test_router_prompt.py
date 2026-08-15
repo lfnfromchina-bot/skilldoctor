@@ -1,4 +1,4 @@
-from skilldoctor.router_prompt import SkillSummary, build_router_prompt, parse_decision
+from skillvet.router_prompt import SkillSummary, build_router_prompt, parse_decision
 
 SKILLS = [
     SkillSummary(name="demo-skill", description="把笔记改写成小红书风格文案"),
