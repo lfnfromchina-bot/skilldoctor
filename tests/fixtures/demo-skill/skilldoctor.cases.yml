@@ -1,0 +1,5 @@
+cases:
+  - input: "帮我把这篇笔记改成小红书风格"
+    expect: trigger
+  - input: "帮我写一篇微信公众号推文"
+    expect: no_trigger

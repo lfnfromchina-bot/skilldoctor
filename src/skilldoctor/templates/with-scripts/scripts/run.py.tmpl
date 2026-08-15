@@ -1,0 +1,24 @@
+"""Entry point for the {{NAME}} skill.
+
+Replace this stub with your real logic. Keep the script runnable
+standalone (argparse in, result on stdout) so the agent can call it
+non-interactively.
+"""
+
+from __future__ import annotations
+
+import argparse
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="{{DESCRIPTION}}")
+    parser.add_argument("--input", required=True, help="user-provided input")
+    args = parser.parse_args()
+
+    # TODO: real implementation
+    print(args.input)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
