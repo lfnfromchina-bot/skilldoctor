@@ -1,7 +1,7 @@
 import pytest
 
-from skillvet.scaffolder import ScaffoldError, new_skill
-from skillvet.validator import validate_skill
+from skilldoctor.scaffolder import ScaffoldError, new_skill
+from skilldoctor.validator import validate_skill
 
 
 def test_scaffold_basic(tmp_path):

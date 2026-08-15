@@ -1,6 +1,6 @@
 """Trigger-rate testing: run declarative cases against a simulated router.
 
-Cases live in a YAML file (default: skillvet.cases.yml in the skill dir):
+Cases live in a YAML file (default: skilldoctor.cases.yml in the skill dir):
 
     cases:
       - input: "帮我把这篇笔记改成小红书风格"
@@ -24,7 +24,7 @@ import yaml
 from .parser import parse_skill
 from .router_prompt import SYSTEM_PROMPT, SkillSummary, build_router_prompt, parse_decision
 
-DEFAULT_CASE_FILES = ("skillvet.cases.yml", "skillvet.cases.yaml", "cases.yml")
+DEFAULT_CASE_FILES = ("skilldoctor.cases.yml", "skilldoctor.cases.yaml", "cases.yml")
 
 
 class TesterError(Exception):
@@ -142,13 +142,13 @@ def run_cases(
     try:
         from openai import OpenAI
     except ImportError as exc:  # pragma: no cover
-        raise TesterError("the `openai` package is required for `skillvet test`") from exc
+        raise TesterError("the `openai` package is required for `skilldoctor test`") from exc
 
-    api_key = api_key or os.environ.get("SKILLVET_API_KEY") or os.environ.get("OPENAI_API_KEY")
-    base_url = base_url or os.environ.get("SKILLVET_BASE_URL") or os.environ.get("OPENAI_BASE_URL")
+    api_key = api_key or os.environ.get("SKILLDOCTOR_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    base_url = base_url or os.environ.get("SKILLDOCTOR_BASE_URL") or os.environ.get("OPENAI_BASE_URL")
     if not api_key:
         raise TesterError(
-            "no API key configured; set SKILLVET_API_KEY / OPENAI_API_KEY or pass --api-key "
+            "no API key configured; set SKILLDOCTOR_API_KEY / OPENAI_API_KEY or pass --api-key "
             "(any OpenAI-compatible endpoint works, e.g. DeepSeek, Kimi, local models)"
         )
 

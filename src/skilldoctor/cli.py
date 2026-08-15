@@ -1,4 +1,4 @@
-"""skillvet command-line interface."""
+"""skilldoctor command-line interface."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from .tester import collect_summaries, find_cases_file, load_cases, run_cases
 from .validator import validate_path
 
 app = typer.Typer(
-    name="skillvet",
+    name="skilldoctor",
     help="Scaffold, validate, lint and test agent skills (SKILL.md).",
     no_args_is_help=True,
 )
@@ -23,7 +23,7 @@ app = typer.Typer(
 
 def _version_callback(value: bool) -> None:
     if value:
-        typer.echo(f"skillvet {__version__}")
+        typer.echo(f"skilldoctor {__version__}")
         raise typer.Exit()
 
 
@@ -64,7 +64,7 @@ def new(
         console.print(f"[bold red]{exc}[/]")
         raise typer.Exit(2) from exc
     console.print(f"[bold green]✓ created {target}[/]")
-    console.print("next: edit SKILL.md, then run [bold]skillvet validate[/] and [bold]skillvet test[/]")
+    console.print("next: edit SKILL.md, then run [bold]skilldoctor validate[/] and [bold]skilldoctor test[/]")
 
 
 @app.command()
@@ -100,13 +100,13 @@ def lint(
 @app.command()
 def test(
     path: Path = typer.Argument(..., help="the skill directory under test"),
-    cases: Optional[Path] = typer.Option(None, "--cases", "-c", help="cases YAML (default: skillvet.cases.yml in the skill dir)"),
+    cases: Optional[Path] = typer.Option(None, "--cases", "-c", help="cases YAML (default: skilldoctor.cases.yml in the skill dir)"),
     with_skills: Optional[list[Path]] = typer.Option(
         None, "--with", "-w", help="other skill dirs to compete against in the simulated listing (repeatable)"
     ),
     model: str = typer.Option("gpt-4o-mini", "--model", "-m", help="any OpenAI-compatible chat model"),
-    api_key: Optional[str] = typer.Option(None, "--api-key", help="or set SKILLVET_API_KEY / OPENAI_API_KEY"),
-    base_url: Optional[str] = typer.Option(None, "--base-url", help="or set SKILLVET_BASE_URL / OPENAI_BASE_URL"),
+    api_key: Optional[str] = typer.Option(None, "--api-key", help="or set SKILLDOCTOR_API_KEY / OPENAI_API_KEY"),
+    base_url: Optional[str] = typer.Option(None, "--base-url", help="or set SKILLDOCTOR_BASE_URL / OPENAI_BASE_URL"),
     json_out: bool = typer.Option(False, "--json"),
 ) -> None:
     """Measure trigger rate: simulate the agent's skill-routing decision with an LLM."""

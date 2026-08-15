@@ -54,7 +54,7 @@ def new_skill(
         raise ScaffoldError(f"{target} already exists")
 
     context = build_context(name, description, phrasings)
-    template_root = resources.files("skillvet") / "templates" / template
+    template_root = resources.files("skilldoctor") / "templates" / template
 
     with resources.as_file(template_root) as template_path:
         for src in sorted(Path(template_path).rglob("*")):

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from skillvet.linter import lint_skill
+from skilldoctor.linter import lint_skill
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

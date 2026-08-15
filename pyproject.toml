@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "skill-inspect"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scaffold, validate, lint and test agent skills (SKILL.md) — like unit tests for your skill descriptions."
 readme = "README.md"
 license = { text = "MIT" }
@@ -34,10 +34,10 @@ dev = ["pytest>=8"]
 Homepage = "https://github.com/lfnfromchina-bot/skilldoctor"
 
 [project.scripts]
-skillvet = "skillvet.cli:app"
+skilldoctor = "skilldoctor.cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/skillvet"]
+packages = ["src/skilldoctor"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from skillvet.parser import SkillParseError, parse_skill
+from skilldoctor.parser import SkillParseError, parse_skill
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

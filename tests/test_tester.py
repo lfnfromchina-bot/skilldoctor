@@ -2,13 +2,13 @@ from pathlib import Path
 
 import pytest
 
-from skillvet.tester import Case, CaseResult, TestReport, TesterError, load_cases
+from skilldoctor.tester import Case, CaseResult, TestReport, TesterError, load_cases
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def test_load_cases():
-    cases = load_cases(FIXTURES / "demo-skill" / "skillvet.cases.yml")
+    cases = load_cases(FIXTURES / "demo-skill" / "skilldoctor.cases.yml")
     assert len(cases) == 2
     assert cases[0].expect_trigger is True
     assert cases[1].expect_trigger is False
