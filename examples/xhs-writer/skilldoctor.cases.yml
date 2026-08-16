@@ -1,13 +1,24 @@
 cases:
+  # —— 常规说法（应保持触发）——
   - input: "帮我把这篇笔记改成小红书风格"
     expect: trigger
   - input: "给我写个小红书爆款标题"
     expect: trigger
+  # —— 刁钻说法（考察 description 词汇覆盖）——
   - input: "发个xhs，主题是周末露营"
+    expect: trigger
+  - input: "red书文案怎么写"
+    expect: trigger
+  - input: "rewrite this post for Xiaohongshu"
     expect: trigger
   - input: "帮我把这个产品介绍改成种草文案"
     expect: trigger
+  # —— 相邻需求（不应误触发）——
   - input: "帮我写一篇微信公众号推文"
     expect: no_trigger
+  - input: "帮我把这篇文章排版成公众号格式"
+    expect: no_trigger
   - input: "帮我写一份工作周报"
+    expect: no_trigger
+  - input: "这个视频脚本帮我润色一下"
     expect: no_trigger
