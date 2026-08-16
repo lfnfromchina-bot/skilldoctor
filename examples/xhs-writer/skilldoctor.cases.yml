@@ -1,0 +1,13 @@
+cases:
+  - input: "帮我把这篇笔记改成小红书风格"
+    expect: trigger
+  - input: "给我写个小红书爆款标题"
+    expect: trigger
+  - input: "发个xhs，主题是周末露营"
+    expect: trigger
+  - input: "帮我把这个产品介绍改成种草文案"
+    expect: trigger
+  - input: "帮我写一篇微信公众号推文"
+    expect: no_trigger
+  - input: "帮我写一份工作周报"
+    expect: no_trigger
