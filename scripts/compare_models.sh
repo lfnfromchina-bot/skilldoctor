@@ -9,11 +9,13 @@ cd "$(dirname "$0")/.."
 
 MODELS=(
   "gpt-4o-mini"
-  "gpt-4o"
-  "claude-sonnet-4-20250514"
-  "deepseek-chat"
-  "qwen-plus"
-  "kimi-k2-0905-preview"
+  "gpt-4.1-nano"
+  "claude-haiku-4-5"
+  "deepseek-v4-flash"
+  "gemini-2.5-flash"
+  "qwen3.7-plus"
+  "kimi-k2.5"
+  "claude-sonnet-4-6"
 )
 
 WITH_FLAGS=(

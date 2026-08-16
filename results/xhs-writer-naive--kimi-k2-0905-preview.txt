@@ -1,0 +1,2 @@
+Error code: 503 - {'error': {'code': 'model_not_found', 'message': '分组 auto 下模型 kimi-k2-0905-preview 无可用渠道（distributor） 
+(request id: 20260816143354301044061WAzwKHCi)', 'type': 'new_api_error'}}
