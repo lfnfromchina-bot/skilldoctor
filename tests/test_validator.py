@@ -45,6 +45,16 @@ def test_validate_path_scans_collection():
     assert set(results) == {"demo-skill", "broken-skill"}
 
 
+def test_validate_path_descends_into_organizational_dirs(tmp_path):
+    nested = tmp_path / "collection" / "group" / "inner-skill"
+    nested.mkdir(parents=True)
+    (nested / "SKILL.md").write_text(
+        "---\nname: inner-skill\ndescription: nested skill fixture\n---\nbody\n", encoding="utf-8"
+    )
+    results = validate_path(tmp_path / "collection")
+    assert set(results) == {"inner-skill"}
+
+
 def test_risky_script_warning(tmp_path):
     skill_dir = tmp_path / "risky-skill"
     (skill_dir / "scripts").mkdir(parents=True)

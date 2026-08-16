@@ -164,11 +164,28 @@ def validate_skill(skill_dir: Path) -> list[Issue]:
 
 
 def iter_skill_dirs(root: Path) -> list[Path]:
-    """If root itself is a skill, return [root]; otherwise scan immediate subdirs."""
+    """If root itself is a skill, return [root]; otherwise find skills recursively.
+
+    Organizational folders (e.g. examples/competitors/) are transparently
+    descended into. Wrongly-cased `skill.md` variants are surfaced so the
+    user gets a useful casing error instead of a silent skip.
+    """
     root = Path(root)
     if (root / "SKILL.md").is_file():
         return [root]
-    return sorted(p for p in root.iterdir() if p.is_dir() and not p.name.startswith("."))
+
+    def hidden_or_venv(p: Path) -> bool:
+        return any(part.startswith(".") or part == ".venv" for part in p.parts)
+
+    found = sorted({p.parent for p in root.rglob("SKILL.md") if not hidden_or_venv(p)})
+    if found:
+        return found
+    variants = {
+        p.parent
+        for p in root.rglob("*")
+        if p.is_file() and p.name.lower() == "skill.md" and p.name != "SKILL.md" and not hidden_or_venv(p)
+    }
+    return sorted(variants)
 
 
 def validate_path(root: Path) -> dict[str, list[Issue]]:
