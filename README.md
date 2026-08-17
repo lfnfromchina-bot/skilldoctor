@@ -1,11 +1,13 @@
 # skilldoctor
 
-**Scaffold, validate, lint and test agent skills (SKILL.md) — like unit tests for your skill descriptions.**
+**Scaffold, validate, lint, test — and auto-improve — agent skills (SKILL.md). Like unit tests, plus a self-healing loop, for your skill descriptions.**
 
 Writing an agent skill is easy. Getting the agent to actually *load* it is not:
 the description field is the only signal the router sees, the spec has silent
 truncation limits, and there is no feedback loop. skilldoctor turns skill
-authoring from guesswork into engineering.
+authoring from guesswork into engineering — and with `improve`, it closes the
+loop: failing phrasings are rewritten into the description and re-tested until
+the numbers move.
 
 ```
 pip install skill-inspect     # or: uvx skill-inspect <cmd>  (zero install)
@@ -106,6 +108,31 @@ hidden reasoning before answering. skilldoctor gives the router a 1024-token
 budget by default and automatically retries at 4096 when a reply comes back
 empty from truncation (`--max-tokens` to tune).
 
+### `skilldoctor improve` — close the loop
+
+`test` tells you the trigger rate; `improve` *fixes* it. Each round, the
+failing phrasings are handed to the LLM, which rewrites the description; the
+candidate is re-scored against the **full** case set, so a rewrite that starts
+false-firing on `no_trigger` cases never wins. Nothing touches your files
+without `--write`.
+
+```
+skilldoctor improve ./xhs-writer --with ./product-copy-generator --rounds 3
+skilldoctor improve ./xhs-writer --write        # apply the best candidate
+```
+
+<p align="center">
+  <img src="docs/improve.png" alt="improve report: baseline 8/10 (67% trigger rate) → round 1 10/10 (100%)" width="760">
+</p>
+
+A real run on `examples/xhs-writer-naive` with gpt-4o-mini: the naive
+description scored **67%**; one rewrite round embedded the missed phrasings
+(`red书文案怎么写`, `帮我把这个产品介绍改成种草文案`) and hit **100%** with
+zero false positives.
+
+Exit code is 0 only when the best candidate passes every case, so
+`improve --json` doubles as a CI gate.
+
 ### Does the description actually matter? Measured.
 
 Same skill, same 10 cases (6 trigger / 4 adjacent), 6 competing skills in the
@@ -169,6 +196,7 @@ skilldoctor 解决写 Agent Skill 时的三个痛点：**description 写不好�
 - `skilldoctor validate`：对照 SKILL.md 规范逐条校验，支持 `--json` 接 CI
 - `skilldoctor lint`：最佳实践检查（触发措辞、渐进式披露、防护栏）
 - `skilldoctor test`：用 LLM 模拟 agent 的 skill 路由决策，量化触发率和误触率，让调 description 像写单元测试一样
+- `skilldoctor improve`：**自动闭环**——把触发失败的说法交给 LLM 改写 description，再用全部用例重新评分（误触护栏不通过的新描述不会胜出），直到通过或达到轮数上限；`--write` 一键把最佳描述写回 SKILL.md
 
 `skilldoctor test` 支持任何 OpenAI 兼容接口（DeepSeek、Kimi、本地模型均可），
 一次测试成本不到一分钱。推理模型（kimi-k2.5、deepseek-r1 类）会先消耗 token

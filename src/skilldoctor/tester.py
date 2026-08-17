@@ -150,15 +150,22 @@ def _ask_router(client, model: str, skills: list[SkillSummary], user_input: str,
     return choice.message.content or "", choice.finish_reason
 
 
-def run_cases(
-    skill_dir: Path,
-    cases: list[Case],
-    skills: list[SkillSummary],
-    model: str,
-    api_key: str | None = None,
-    base_url: str | None = None,
-    max_tokens: int = DEFAULT_MAX_TOKENS,
-) -> TestReport:
+def evaluate(client, model: str, target_name: str, skills: list[SkillSummary], cases: list[Case], max_tokens: int) -> TestReport:
+    """Run all cases against the router using an existing client."""
+    report = TestReport(skill_name=target_name)
+    for case in cases:
+        reply, finish_reason = _ask_router(client, model, skills, case.input, max_tokens)
+        # Reasoning models (deepseek-r1-style, kimi thinking, ...) spend tokens on
+        # hidden reasoning before answering; a truncated budget returns an empty
+        # reply (finish_reason="length"), which must not be scored as "no skill".
+        if finish_reason == "length" and not reply.strip() and max_tokens < RETRY_MAX_TOKENS:
+            reply, _ = _ask_router(client, model, skills, case.input, RETRY_MAX_TOKENS)
+        report.results.append(CaseResult(case=case, chosen=parse_decision(reply, skills), target_name=target_name))
+    return report
+
+
+def make_client(api_key: str | None, base_url: str | None):
+    """Resolve credentials from args/env and build an OpenAI-compatible client."""
     try:
         from openai import OpenAI
     except ImportError as exc:  # pragma: no cover
@@ -171,18 +178,19 @@ def run_cases(
             "no API key configured; set SKILLDOCTOR_API_KEY / OPENAI_API_KEY or pass --api-key "
             "(any OpenAI-compatible endpoint works, e.g. DeepSeek, Kimi, local models)"
         )
+    return OpenAI(api_key=api_key, base_url=base_url)
 
+
+def run_cases(
+    skill_dir: Path,
+    cases: list[Case],
+    skills: list[SkillSummary],
+    model: str,
+    api_key: str | None = None,
+    base_url: str | None = None,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+) -> TestReport:
+    client = make_client(api_key, base_url)
     target = parse_skill(skill_dir)
     target_name = target.name or Path(skill_dir).name
-    client = OpenAI(api_key=api_key, base_url=base_url)
-
-    report = TestReport(skill_name=target_name)
-    for case in cases:
-        reply, finish_reason = _ask_router(client, model, skills, case.input, max_tokens)
-        # Reasoning models (deepseek-r1-style, kimi thinking, ...) spend tokens on
-        # hidden reasoning before answering; a truncated budget returns an empty
-        # reply (finish_reason="length"), which must not be scored as "no skill".
-        if finish_reason == "length" and not reply.strip() and max_tokens < RETRY_MAX_TOKENS:
-            reply, _ = _ask_router(client, model, skills, case.input, RETRY_MAX_TOKENS)
-        report.results.append(CaseResult(case=case, chosen=parse_decision(reply, skills), target_name=target_name))
-    return report
+    return evaluate(client, model, target_name, skills, cases, max_tokens)

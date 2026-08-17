@@ -144,3 +144,45 @@ def test(
         typer.echo(json.dumps(report.as_dict(), ensure_ascii=False, indent=2))
         raise typer.Exit(0 if report.passed == report.total else 1)
     raise typer.Exit(render_test_report(report))
+
+
+@app.command()
+def improve(
+    path: Path = typer.Argument(..., help="the skill directory to optimize"),
+    cases: Optional[Path] = typer.Option(None, "--cases", "-c", help="cases YAML (default: skilldoctor.cases.yml in the skill dir)"),
+    with_skills: Optional[list[Path]] = typer.Option(
+        None, "--with", "-w", help="competitor skill dirs for the simulated listing (repeatable)"
+    ),
+    model: str = typer.Option("gpt-4o-mini", "--model", "-m", help="any OpenAI-compatible chat model"),
+    api_key: Optional[str] = typer.Option(None, "--api-key", help="or set SKILLDOCTOR_API_KEY / OPENAI_API_KEY"),
+    base_url: Optional[str] = typer.Option(None, "--base-url", help="or set SKILLDOCTOR_BASE_URL / OPENAI_BASE_URL"),
+    max_tokens: int = typer.Option(1024, "--max-tokens", help="LLM reply budget per call"),
+    rounds: int = typer.Option(3, "--rounds", "-r", help="max rewrite iterations"),
+    write: bool = typer.Option(False, "--write", help="apply the best description to SKILL.md"),
+    json_out: bool = typer.Option(False, "--json"),
+) -> None:
+    """Auto-improve the description: test -> rewrite with LLM -> re-test."""
+    from .improver import improve_skill, write_description
+    from .report import console, render_improve_report
+
+    try:
+        cases_file = cases or find_cases_file(path)
+        case_list = load_cases(cases_file)
+        skills = collect_summaries(path, with_skills)
+        result = improve_skill(
+            path, case_list, skills, model=model,
+            api_key=api_key, base_url=base_url, rounds=rounds, max_tokens=max_tokens,
+        )
+    except Exception as exc:
+        console.print(f"[bold red]{exc}[/]")
+        raise typer.Exit(2) from exc
+
+    if json_out:
+        typer.echo(json.dumps(result.as_dict(), ensure_ascii=False, indent=2))
+        raise typer.Exit(0 if result.solved else 1)
+
+    exit_code = render_improve_report(result)
+    if write and result.improved:
+        target = write_description(path, result.best.description)
+        console.print(f"\n[bold green]✓ wrote best description to {target}[/]")
+    raise typer.Exit(exit_code)

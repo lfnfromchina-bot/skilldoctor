@@ -6,6 +6,7 @@ from rich import box
 from rich.console import Console
 from rich.table import Table
 
+from .improver import ImproveResult
 from .issues import Issue, Level
 from .tester import TestReport
 
@@ -78,3 +79,30 @@ def render_test_report(report: TestReport) -> int:
         console.print(f"\n[yellow]suggestion:[/] these phrasings failed to trigger: {missed}")
         console.print("add them (or their vocabulary) verbatim to the skill description, then re-run.")
     return 0 if report.passed == report.total else 1
+
+
+def render_improve_report(result: ImproveResult) -> int:
+    """Round-by-round optimization table. Returns process exit code."""
+    table = Table(box=TABLE_BOX, title=f"{result.skill_name} — improve report", pad_edge=False)
+    table.add_column("round")
+    table.add_column("passed")
+    table.add_column("trigger rate")
+    table.add_column("false-positive")
+    table.add_column("description", style="dim", max_width=48)
+    for i, rnd in enumerate(result.rounds):
+        rep = rnd.report
+        rate = f"{rep.trigger_rate:.0%}" if rep.trigger_rate is not None else "—"
+        fpr = f"{rep.false_positive_rate:.0%}" if rep.false_positive_rate is not None else "—"
+        label = "baseline" if i == 0 else f"round {i}"
+        table.add_row(label, f"{rep.passed}/{rep.total}", rate, fpr, rnd.description)
+    console.print(table)
+
+    best = result.best
+    if result.improved:
+        console.print("\n[bold]best description[/] (re-run with [bold]--write[/] to apply):")
+        console.print(f"[green]{best.description}[/]")
+    elif result.solved:
+        console.print("\n[bold green]✓ baseline already passes all cases; nothing to improve[/]")
+    else:
+        console.print("\n[yellow]no candidate beat the baseline; description left unchanged[/]")
+    return 0 if result.solved else 1
