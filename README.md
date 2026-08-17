@@ -109,6 +109,42 @@ add them (or their vocabulary) verbatim to the skill description, then re-run.
 > routing. Use it to iterate on descriptions — not as a guarantee of in-agent
 > behavior.
 
+Reasoning models (deepseek-r1-style, kimi-k2.5 thinking, …) spend tokens on
+hidden reasoning before answering. skilldoctor gives the router a 1024-token
+budget by default and automatically retries at 4096 when a reply comes back
+empty from truncation (`--max-tokens` to tune).
+
+### Does the description actually matter? Measured.
+
+Same skill, same 10 cases (6 trigger / 4 adjacent), 6 competing skills in the
+listing — only the description differs (`xhs-writer-naive` vs `xhs-writer`):
+
+| Router model | naive description | optimized description |
+|---|---|---|
+| gpt-4o-mini | **67%** | **83%** |
+| gpt-4o | 100% | 100% |
+| claude-haiku-4-5 | 100% | 100% |
+| claude-sonnet-4-6 | 100% | 100% |
+| gemini-2.5-flash | 100% | 100% |
+| qwen3.7-plus | 100% | 100% |
+| deepseek-v4-flash (reasoning) | 83% | 100% |
+| kimi-k2.5 (reasoning) | 100% | 100% |
+
+Two takeaways:
+
+1. **Frontier models forgive sloppy descriptions — weaker routers don't.**
+   gpt-4o-mini missed `red书文案怎么写` and `帮我把这个产品介绍改成种草文案`
+   with the naive description, and found both after the wording fix. If your
+   agent runs on a small model, trigger-rate testing is not optional.
+2. **The remaining failure is real signal, not noise.** Every model that
+   missed a case lost `帮我把这个产品介绍改成种草文案` to a competitor skill
+   (`product-copy-generator`) whose description overlaps. That is a skill
+   *boundary* problem you can see and fix — exactly what `--with` is for.
+
+Reproduce with `scripts/compare_models.sh` (raw outputs in `results/`).
+Aggregator-routed models show minor run-to-run variance at temperature 0;
+the artifacts in `results/` are the runs we report.
+
 ## Use it in CI
 
 `validate --json` exits non-zero on spec errors, so any skill repo can gate on it.
@@ -143,4 +179,10 @@ skilldoctor 解决写 Agent Skill 时的三个痛点：**description 写不好�
 - `skilldoctor test`：用 LLM 模拟 agent 的 skill 路由决策，量化触发率和误触率，让调 description 像写单元测试一样
 
 `skilldoctor test` 支持任何 OpenAI 兼容接口（DeepSeek、Kimi、本地模型均可），
-一次测试成本不到一分钱。
+一次测试成本不到一分钱。推理模型（kimi-k2.5、deepseek-r1 类）会先消耗 token
+做隐式推理，skilldoctor 默认给 1024 token 预算、被截断时自动以 4096 重试。
+
+实测结论（10 条用例 + 6 个竞品 skill 同场竞技）：GPT-4o / Claude / Gemini /
+Qwen / DeepSeek / Kimi 等主流模型对朴素 description 也能 100% 触发，但弱模型
+gpt-4o-mini 只有 67%——把用户真实说法写进 description 后升到 83%。
+**如果你的 agent 跑在小模型上，触发率测试不是可选项。** 完整矩阵见上文英文版。

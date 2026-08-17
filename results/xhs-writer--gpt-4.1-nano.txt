@@ -1,0 +1,2 @@
+Error code: 503 - {'error': {'message': 'No available channel for model gpt-4.1-nano under group az (distributor) (request id: 
+202608161454366465498848268d9d6vRiFFKYe)', 'type': 'new_api_error', 'param': '', 'code': 'model_not_found'}}

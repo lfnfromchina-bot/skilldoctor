@@ -1,2 +1,0 @@
-Error code: 503 - {'error': {'code': 'model_not_found', 'message': '分组 auto 下模型 deepseek-chat 无可用渠道（distributor） (request 
-id: 20260816143342552705443O7yVIRsD)', 'type': 'new_api_error'}}

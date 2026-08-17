@@ -2,7 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from skilldoctor.tester import Case, CaseResult, TestReport, TesterError, load_cases
+from skilldoctor.router_prompt import SkillSummary
+from skilldoctor.tester import Case, CaseResult, TestReport, TesterError, load_cases, run_cases
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -39,3 +40,71 @@ def test_report_metrics():
     assert report.total == 4
     assert report.trigger_rate == 0.5
     assert report.false_positive_rate == 0.5
+
+
+class _FakeMessage:
+    def __init__(self, content):
+        self.content = content
+
+
+class _FakeChoice:
+    def __init__(self, content, finish_reason):
+        self.message = _FakeMessage(content)
+        self.finish_reason = finish_reason
+
+
+class _FakeCompletions:
+    """Plays back a script of (content, finish_reason) responses."""
+
+    def __init__(self, script):
+        self.script = list(script)
+        self.calls = []
+
+    def create(self, **kwargs):
+        self.calls.append(kwargs)
+        content, finish_reason = self.script.pop(0)
+        return type("Completion", (), {"choices": [_FakeChoice(content, finish_reason)]})
+
+
+class _FakeClient:
+    def __init__(self, script):
+        self.chat = type("Chat", (), {"completions": _FakeCompletions(script)})
+
+
+def _install_fake_openai(monkeypatch, script):
+    client = _FakeClient(script)
+    monkeypatch.setattr("openai.OpenAI", lambda **kwargs: client)
+    monkeypatch.setenv("SKILLDOCTOR_API_KEY", "test-key")
+    return client
+
+
+def test_run_cases_retries_reasoning_model_truncation(monkeypatch):
+    """A reasoning model that spends its whole budget thinking returns an empty
+    reply with finish_reason='length'; we must retry with a larger budget
+    instead of scoring it as NONE."""
+    client = _install_fake_openai(monkeypatch, [("", "length"), ("demo-skill", "stop")])
+    skills = [SkillSummary(name="demo-skill", description="demo")]
+    report = run_cases(
+        FIXTURES / "demo-skill",
+        [Case(input="触发一下", expect_trigger=True)],
+        skills,
+        model="fake-reasoner",
+    )
+    assert len(client.chat.completions.calls) == 2
+    assert client.chat.completions.calls[1]["max_tokens"] == 4096
+    assert report.results[0].chosen == "demo-skill"
+    assert report.trigger_rate == 1.0
+
+
+def test_run_cases_no_retry_on_normal_answer(monkeypatch):
+    client = _install_fake_openai(monkeypatch, [("NONE", "stop")])
+    skills = [SkillSummary(name="demo-skill", description="demo")]
+    report = run_cases(
+        FIXTURES / "demo-skill",
+        [Case(input="无关请求", expect_trigger=False)],
+        skills,
+        model="fake-chat",
+    )
+    assert len(client.chat.completions.calls) == 1
+    assert client.chat.completions.calls[0]["max_tokens"] == 1024
+    assert report.results[0].chosen is None

@@ -131,6 +131,25 @@ def collect_summaries(skill_dir: Path, extra_dirs: list[Path] | None = None) -> 
     return summaries
 
 
+DEFAULT_MAX_TOKENS = 1024
+RETRY_MAX_TOKENS = 4096
+
+
+def _ask_router(client, model: str, skills: list[SkillSummary], user_input: str, max_tokens: int) -> tuple[str, str | None]:
+    """One routing question. Returns (reply_text, finish_reason)."""
+    completion = client.chat.completions.create(
+        model=model,
+        temperature=0,
+        max_tokens=max_tokens,
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": build_router_prompt(skills, user_input)},
+        ],
+    )
+    choice = completion.choices[0]
+    return choice.message.content or "", choice.finish_reason
+
+
 def run_cases(
     skill_dir: Path,
     cases: list[Case],
@@ -138,6 +157,7 @@ def run_cases(
     model: str,
     api_key: str | None = None,
     base_url: str | None = None,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
 ) -> TestReport:
     try:
         from openai import OpenAI
@@ -158,15 +178,11 @@ def run_cases(
 
     report = TestReport(skill_name=target_name)
     for case in cases:
-        completion = client.chat.completions.create(
-            model=model,
-            temperature=0,
-            max_tokens=20,
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": build_router_prompt(skills, case.input)},
-            ],
-        )
-        reply = completion.choices[0].message.content or ""
+        reply, finish_reason = _ask_router(client, model, skills, case.input, max_tokens)
+        # Reasoning models (deepseek-r1-style, kimi thinking, ...) spend tokens on
+        # hidden reasoning before answering; a truncated budget returns an empty
+        # reply (finish_reason="length"), which must not be scored as "no skill".
+        if finish_reason == "length" and not reply.strip() and max_tokens < RETRY_MAX_TOKENS:
+            reply, _ = _ask_router(client, model, skills, case.input, RETRY_MAX_TOKENS)
         report.results.append(CaseResult(case=case, chosen=parse_decision(reply, skills), target_name=target_name))
     return report

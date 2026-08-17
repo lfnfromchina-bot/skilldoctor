@@ -1,0 +1,21 @@
+                     xhs-writer-naive — trigger test report                     
+                                                                                
+ input                             expected     router chose             result 
+ ────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这篇笔记改成小红书风格      trigger      xhs-writer-naive         ✓      
+ 给我写个小红书爆款标题            trigger      xhs-writer-naive         ✓      
+ 发个xhs，主题是周末露营           trigger      xhs-writer-naive         ✓      
+ red书文案怎么写                   trigger      xhs-writer-naive         ✓      
+ rewrite this post for             trigger      xhs-writer-naive         ✓      
+ Xiaohongshu                                                                    
+ 帮我把这个产品介绍改成种草文案    trigger      product-copy-generator   ✗      
+ 帮我写一篇微信公众号推文          no_trigger   wechat-editor            ✓      
+ 帮我把这篇文章排版成公众号格式    no_trigger   wechat-editor            ✓      
+ 帮我写一份工作周报                no_trigger   weekly-report-cn         ✓      
+ 这个视频脚本帮我润色一下          no_trigger   video-script-polisher    ✓      
+                                                                                
+
+passed 9/10  ·  trigger rate 83%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我把这个产品介绍改成种草文案"
+add them (or their vocabulary) verbatim to the skill description, then re-run.

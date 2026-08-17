@@ -107,6 +107,9 @@ def test(
     model: str = typer.Option("gpt-4o-mini", "--model", "-m", help="any OpenAI-compatible chat model"),
     api_key: Optional[str] = typer.Option(None, "--api-key", help="or set SKILLDOCTOR_API_KEY / OPENAI_API_KEY"),
     base_url: Optional[str] = typer.Option(None, "--base-url", help="or set SKILLDOCTOR_BASE_URL / OPENAI_BASE_URL"),
+    max_tokens: int = typer.Option(
+        1024, "--max-tokens", help="router reply budget; reasoning models need headroom (auto-retries at 4096 on truncation)"
+    ),
     json_out: bool = typer.Option(False, "--json"),
 ) -> None:
     """Measure trigger rate: simulate the agent's skill-routing decision with an LLM."""
@@ -116,7 +119,7 @@ def test(
         cases_file = cases or find_cases_file(path)
         case_list = load_cases(cases_file)
         skills = collect_summaries(path, with_skills)
-        report = run_cases(path, case_list, skills, model=model, api_key=api_key, base_url=base_url)
+        report = run_cases(path, case_list, skills, model=model, api_key=api_key, base_url=base_url, max_tokens=max_tokens)
     except Exception as exc:
         console.print(f"[bold red]{exc}[/]")
         raise typer.Exit(2) from exc
