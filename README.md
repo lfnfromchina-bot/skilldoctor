@@ -90,21 +90,12 @@ skilldoctor test ./xhs-writer --with ./other-skill   # compete against installed
 
 Output:
 
-```
+<p align="center">
+  <img src="docs/demo.png" alt="trigger test report" width="720">
+</p>
 
-                 xhs-writer — trigger test report
-
- input                          expected     router chose   result
- ─────────────────────────────────────────────────────────────────
- 帮我把这篇笔记改成小红书风格   trigger      xhs-writer     ✓
- 发个xhs                        trigger      NONE           ✗
- 帮我写公众号推文               no_trigger   NONE           ✓
-
-passed 2/3  ·  trigger rate 50%  ·  false-positive rate 0%
-
-suggestion: these phrasings failed to trigger: "发个xhs"
-add them (or their vocabulary) verbatim to the skill description, then re-run.
-```
+(The report is plain text with a three-line table; the screenshot above is
+pixel-aligned. Regenerate with `scripts/make_demo_image.py`.)
 
 > **Honest scope:** the simulated router is an *approximation* of real agent
 > routing. Use it to iterate on descriptions — not as a guarantee of in-agent
