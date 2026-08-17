@@ -194,7 +194,7 @@ claims *everything*. Reproduce with `scripts/compare_models_hard.sh`
 | qwen3.7-max | 11/16 · 38% trigger | 15/16 · 88% trigger |
 | deepseek-v4-flash (reasoning) | 13/16 · 62% trigger | 15/16 · 88% trigger |
 | deepseek-v4-pro (reasoning) | 13/16 · 62% trigger | 14/16 · 75% trigger |
-| kimi-k2.5 (reasoning) | 11/16 · 38% trigger | — |
+| kimi-k2.5 (reasoning) | 11/16 · 38% trigger | 14/16 · 75% trigger |
 
 (FP = false-positive rate on the 8 adjacent cases; n=16, single run per cell.)
 
