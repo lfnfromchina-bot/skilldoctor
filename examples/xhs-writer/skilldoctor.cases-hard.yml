@@ -1,0 +1,38 @@
+# Hard case set: no bare keywords ("小红书"/"xhs" appear only inside adversarial
+# no_trigger cases), indirect phrasings, homophones, and look-alike requests that
+# must NOT trigger. A perfect router should still pass all of these.
+cases:
+  # ---- trigger: indirect but defensible ----
+  - input: "帮我把这段产品描述写得更有种草感"
+    expect: trigger
+  - input: "这篇笔记帮我起个能爆的标题"
+    expect: trigger
+  - input: "我想发篇笔记推一下这家咖啡店，写得生活化一点"
+    expect: trigger
+  - input: "把这篇测评改成适合发在红薯上的风格"
+    expect: trigger          # 红薯 = red-book homophone
+  - input: "帮我写条探店笔记，人均50的日式拉面"
+    expect: trigger
+  - input: "这段文字太硬了，加点emoji和生活化语气，我要发笔记"
+    expect: trigger
+  - input: "rewrite this for RED, my followers love skincare tips"
+    expect: trigger
+  - input: "帮我把这篇英文博客改成中文种草笔记"
+    expect: trigger
+  # ---- no_trigger: xhs-adjacent but the task belongs elsewhere ----
+  - input: "帮我把这篇小红书笔记改成公众号长文"
+    expect: no_trigger       # target: wechat-editor — mentions 小红书 as source only
+  - input: "帮我写个抖音探店短视频脚本"
+    expect: no_trigger       # adjacent platform, video-script territory
+  - input: "帮我分析一下这条笔记为什么不火"
+    expect: no_trigger       # analysis, not writing
+  - input: "帮我回复评论区里这条差评"
+    expect: no_trigger
+  - input: "给我的淘宝详情页写段卖点文案"
+    expect: no_trigger       # product-copy-generator's job
+  - input: "帮我把简历改得更有吸引力"
+    expect: no_trigger
+  - input: "总结一下今年小红书上的爆款趋势"
+    expect: no_trigger       # research, not writing
+  - input: "这篇小红书爆款帮我翻译成英文发 Medium"
+    expect: no_trigger       # translation, not rewriting-for-xhs

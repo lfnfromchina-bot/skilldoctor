@@ -1,0 +1,25 @@
+                        xhs-writer — trigger test report                        
+                                                                                
+ input                             expected     router chose             result 
+ ────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草…   trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题        trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，…   trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的…   trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式…   trigger      xhs-writer               ✓      
+ 这段文字太硬了，加点emoji和生 …   trigger      xhs-writer               ✓      
+ rewrite this for RED, my          trigger      xhs-writer               ✓      
+ followers love skincare tips                                                   
+ 帮我把这篇英文博客改成中文种草…   trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号…   no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本        no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火    no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评          no_trigger   NONE                     ✓      
+ 给我的淘宝详情页写段卖点文案      no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力          no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势    no_trigger   xhs-writer               ✗      
+ 这篇小红书爆款帮我翻译成英文发    no_trigger   NONE                     ✓      
+ Medium                                                                         
+                                                                                
+
+passed 15/16  ·  trigger rate 100%  ·  false-positive rate 12%

@@ -1,0 +1,664 @@
+MODEL: gpt-5   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer-naive         ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer-naive         ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   universal-copywriter     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 13/16  ·  trigger rate 62%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gpt-5   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      xhs-writer               ✓      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   universal-copywriter     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "这篇笔记帮我起个能爆的标题"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gpt-5.1   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gpt-5.1   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 12/16  ·  trigger rate 50%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: claude-haiku-4-5   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer-naive         ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   NONE                     ✓      
+                                                                                                      
+
+passed 12/16  ·  trigger rate 50%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"帮我写条探店笔记，人均50的日式拉面"、"帮我把这篇英文博客改成中文种草
+笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: claude-haiku-4-5   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   NONE                     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: claude-sonnet-4-6   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      product-copy-generator   ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   NONE                     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: claude-sonnet-4-6   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      xhs-writer               ✓      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   NONE                     ✓      
+                                                                                                      
+
+passed 16/16  ·  trigger rate 100%  ·  false-positive rate 0%
+
+MODEL: claude-opus-4-6   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer-naive         ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer-naive         ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   xhs-writer-naive         ✗      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   xhs-writer-naive         ✗      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   xhs-writer-naive         ✗      
+                                                                                                      
+
+passed 10/16  ·  trigger rate 62%  ·  false-positive rate 38%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"帮我写条探店笔记，人均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: claude-opus-4-6   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      xhs-writer               ✓      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   video-script-polisher    ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   universal-copywriter     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   universal-copywriter     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   NONE                     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我把这段产品描述写得更有种草感"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gemini-2.5-flash   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   universal-copywriter     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gemini-2.5-flash   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 14/16  ·  trigger rate 75%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我写条探店笔记，人均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gemini-2.5-pro   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: gemini-2.5-pro   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      xhs-writer               ✓      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 16/16  ·  trigger rate 100%  ·  false-positive rate 0%
+
+MODEL: qwen3.7-plus   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer-naive         ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   xhs-writer-naive         ✗      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 50%  ·  false-positive rate 12%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: qwen3.7-plus   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   wechat-editor            ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   universal-copywriter     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: qwen3.7-max   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: qwen3.7-max   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: deepseek-v4-flash   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      product-copy-generator   ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer-naive         ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer-naive         ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 13/16  ·  trigger rate 62%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: deepseek-v4-flash   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      xhs-writer               ✓      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 15/16  ·  trigger rate 88%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: deepseek-v4-pro   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      product-copy-generator   ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer-naive         ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer-naive         ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 13/16  ·  trigger rate 62%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: deepseek-v4-pro   SKILL: xhs-writer
+                                   xhs-writer — trigger test report                                   
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      product-copy-generator   ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      xhs-writer               ✓      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      xhs-writer               ✓      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer               ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer               ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer               ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      xhs-writer               ✓      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   NONE                     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 14/16  ·  trigger rate 75%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: "帮我把这段产品描述写得更有种草感"、"帮我写条探店笔记，人均50的日式拉面"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: kimi-k2.5   SKILL: xhs-writer-naive
+                                xhs-writer-naive — trigger test report                                
+                                                                                                      
+ input                                                   expected     router chose             result 
+ ──────────────────────────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这段产品描述写得更有种草感                        trigger      universal-copywriter     ✗      
+ 这篇笔记帮我起个能爆的标题                              trigger      universal-copywriter     ✗      
+ 我想发篇笔记推一下这家咖啡店，写得生活化一点            trigger      universal-copywriter     ✗      
+ 把这篇测评改成适合发在红薯上的风格                      trigger      xhs-writer-naive         ✓      
+ 帮我写条探店笔记，人均50的日式拉面                      trigger      universal-copywriter     ✗      
+ 这段文字太硬了，加点emoji和生活化语气，我要发笔记       trigger      xhs-writer-naive         ✓      
+ rewrite this for RED, my followers love skincare tips   trigger      xhs-writer-naive         ✓      
+ 帮我把这篇英文博客改成中文种草笔记                      trigger      universal-copywriter     ✗      
+ 帮我把这篇小红书笔记改成公众号长文                      no_trigger   universal-copywriter     ✓      
+ 帮我写个抖音探店短视频脚本                              no_trigger   universal-copywriter     ✓      
+ 帮我分析一下这条笔记为什么不火                          no_trigger   NONE                     ✓      
+ 帮我回复评论区里这条差评                                no_trigger   universal-copywriter     ✓      
+ 给我的淘宝详情页写段卖点文案                            no_trigger   product-copy-generator   ✓      
+ 帮我把简历改得更有吸引力                                no_trigger   resume-cn-optimizer      ✓      
+ 总结一下今年小红书上的爆款趋势                          no_trigger   universal-copywriter     ✓      
+ 这篇小红书爆款帮我翻译成英文发 Medium                   no_trigger   universal-copywriter     ✓      
+                                                                                                      
+
+passed 11/16  ·  trigger rate 38%  ·  false-positive rate 0%
+
+suggestion: these phrasings failed to trigger: 
+"帮我把这段产品描述写得更有种草感"、"这篇笔记帮我起个能爆的标题"、"我想发篇笔记推一下这家咖啡店，写得生活化一点"、"帮我写条探店笔记，人
+均50的日式拉面"、"帮我把这篇英文博客改成中文种草笔记"
+add them (or their vocabulary) verbatim to the skill description, then re-run.
+
+MODEL: kimi-k2.5   SKILL: xhs-writer
+Error code: 503 - {'error': {'message': 'No available channel for model kimi-k2.5 under group opensource (distributor) (request id: 
+202608170855577432648488268d9d6j44cZhOO)', 'type': 'new_api_error', 'param': '', 'code': 'model_not_found'}}
+

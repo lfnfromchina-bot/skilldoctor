@@ -168,6 +168,49 @@ Reproduce with `scripts/compare_models.sh` (raw outputs in `results/`).
 Aggregator-routed models show minor run-to-run variance at temperature 0;
 the artifacts in `results/` are the runs we report.
 
+### Hard mode: where easy cases saturate
+
+The 10-case set above has a ceiling effect — every frontier model aces it. So
+we built a harder benchmark (`examples/xhs-writer/skilldoctor.cases-hard.yml`,
+16 cases): trigger phrasings that never say "小红书" (homophones like 红薯,
+indirect asks like "写得更有种草感"), adversarial no_triggers that mention
+小红书 but belong to another skill ("帮我把这篇小红书笔记改成公众号长文"), and
+one deliberately greedy competitor (`universal-copywriter`) whose description
+claims *everything*. Reproduce with `scripts/compare_models_hard.sh`
+(raw outputs in `results/hard/`):
+
+| Router model | naive description | optimized description |
+|---|---|---|
+| gpt-4o-mini | 11/16 · 38% trigger | 14/16 · 75% trigger |
+| gpt-4o | 10/16 · 38% trigger · 12% FP | 15/16 · 100% trigger · **12% FP** |
+| gpt-5 | 13/16 · 62% trigger | 15/16 · 88% trigger |
+| gpt-5.1 | 11/16 · 38% trigger | 12/16 · 50% trigger |
+| claude-haiku-4-5 | 12/16 · 50% trigger | 15/16 · 88% trigger |
+| claude-sonnet-4-6 | 11/16 · 38% trigger | **16/16 · 100% trigger** |
+| claude-opus-4-6 | 10/16 · 62% trigger · **38% FP** | 15/16 · 88% trigger |
+| gemini-2.5-flash | 11/16 · 38% trigger | 14/16 · 75% trigger |
+| gemini-2.5-pro | 11/16 · 38% trigger | **16/16 · 100% trigger** |
+| qwen3.7-plus | 11/16 · 50% trigger · 12% FP | 15/16 · 88% trigger |
+| qwen3.7-max | 11/16 · 38% trigger | 15/16 · 88% trigger |
+| deepseek-v4-flash (reasoning) | 13/16 · 62% trigger | 15/16 · 88% trigger |
+| deepseek-v4-pro (reasoning) | 13/16 · 62% trigger | 14/16 · 75% trigger |
+| kimi-k2.5 (reasoning) | 11/16 · 38% trigger | — |
+
+(FP = false-positive rate on the 8 adjacent cases; n=16, single run per cell.)
+
+What the hard set reveals:
+
+1. **Easy cases flatter every model.** No model beats a 62% trigger rate with
+   the naive description here, and only claude-sonnet-4-6 and gemini-2.5-pro
+   reach a perfect 16/16 — *and only with the optimized description*.
+2. **Bigger ≠ more disciplined.** claude-opus-4-6 with the naive description
+   fired on 38% of requests that belonged to *other* skills; the wording fix
+   brought it to 0%. gpt-4o kept a 12% false-positive rate even optimized.
+3. **Newer ≠ better.** gpt-5.1 (50% optimized) trails gpt-5 (88%) on trigger
+   rate here. Single-run, small-n — treat as a smoke signal, not a verdict.
+4. **Optimization lifts every tier.** 38–62% naive → 75–100% optimized, across
+   all 13 models. That is the whole pitch: measure, then fix, then re-measure.
+
 ## Use it in CI
 
 `validate --json` exits non-zero on spec errors, so any skill repo can gate on it.
@@ -210,3 +253,10 @@ skilldoctor 解决写 Agent Skill 时的三个痛点：**description 写不好�
 Qwen / DeepSeek / Kimi 等主流模型对朴素 description 也能 100% 触发，但弱模型
 gpt-4o-mini 只有 67%——把用户真实说法写进 description 后升到 83%。
 **如果你的 agent 跑在小模型上，触发率测试不是可选项。** 完整矩阵见上文英文版。
+
+简单用例有天花板，于是我们又做了一套**困难基准**（`skilldoctor.cases-hard.yml`，
+16 条：不提"小红书"的间接触发说法、故意提到小红书但属于别家的对抗性 no_trigger、
+外加一个什么都敢接的贪婪竞品 skill）。结果：朴素 description 下**没有任何模型**
+超过 62% 触发率；优化后全部升到 75–100%；只有 claude-sonnet-4-6 和 gemini-2.5-pro
+拿到满分 16/16。最大的反差：claude-opus-4-6 在朴素描述下误触率 38%（见啥接啥），
+description 改好后归零。数据在 `results/hard/`。
