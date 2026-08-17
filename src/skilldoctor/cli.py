@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 from typing import Optional
 
@@ -13,6 +14,21 @@ from .linter import lint_path
 from .scaffolder import TEMPLATES, ScaffoldError, new_skill
 from .tester import collect_summaries, find_cases_file, load_cases, run_cases
 from .validator import validate_path
+
+
+def _force_utf8_stdio() -> None:
+    """Reports contain CJK text; a C/POSIX locale turns redirected stdout into
+    ASCII and crashes rich mid-table. UTF-8 output is always what we want."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            try:
+                reconfigure(encoding="utf-8", errors="replace")
+            except Exception:  # pragma: no cover - exotic stream types
+                pass
+
+
+_force_utf8_stdio()
 
 app = typer.Typer(
     name="skilldoctor",

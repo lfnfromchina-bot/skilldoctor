@@ -1,1 +1,18 @@
-'ascii' codec can't encode characters in position 7-8: ordinal not in range(128)
+                        xhs-writer — trigger test report                        
+                                                                                
+ input                              expected     router chose            result 
+ ────────────────────────────────────────────────────────────────────────────── 
+ 帮我把这篇笔记改成小红书风格       trigger      xhs-writer              ✓      
+ 给我写个小红书爆款标题             trigger      xhs-writer              ✓      
+ 发个xhs，主题是周末露营            trigger      xhs-writer              ✓      
+ red书文案怎么写                    trigger      xhs-writer              ✓      
+ rewrite this post for              trigger      xhs-writer              ✓      
+ Xiaohongshu                                                                    
+ 帮我把这个产品介绍改成种草文案     trigger      xhs-writer              ✓      
+ 帮我写一篇微信公众号推文           no_trigger   NONE                    ✓      
+ 帮我把这篇文章排版成公众号格式     no_trigger   wechat-editor           ✓      
+ 帮我写一份工作周报                 no_trigger   weekly-report-cn        ✓      
+ 这个视频脚本帮我润色一下           no_trigger   video-script-polisher   ✓      
+                                                                                
+
+passed 10/10  ·  trigger rate 100%  ·  false-positive rate 0%
