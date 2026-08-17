@@ -1,5 +1,9 @@
 # skilldoctor
 
+[![PyPI](https://img.shields.io/pypi/v/skill-inspect)](https://pypi.org/project/skill-inspect/)
+[![Python](https://img.shields.io/pypi/pyversions/skill-inspect)](https://pypi.org/project/skill-inspect/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 **Scaffold, validate, lint, test — and auto-improve — agent skills (SKILL.md). Like unit tests, plus a self-healing loop, for your skill descriptions.**
 
 Writing an agent skill is easy. Getting the agent to actually *load* it is not:
