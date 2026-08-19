@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Optional
@@ -50,6 +51,32 @@ def main(
     """Scaffold, validate, lint and test agent skills."""
 
 
+def _pick_lang(lang: Optional[str]) -> str:
+    """UI language: explicit --lang flag, else system locale (zh* → Chinese)."""
+    if lang:
+        return "zh" if lang.lower().startswith("zh") else "en"
+    import locale
+
+    for var in (locale.getlocale()[0], os.environ.get("LANG", ""), os.environ.get("LC_ALL", "")):
+        if var and var.lower().startswith("zh"):
+            return "zh"
+    return "en"
+
+
+_PROMPTS = {
+    "en": {
+        "ask_desc": "What does this skill do? (one sentence)",
+        "ask_say": "How would users phrase this request? Enter 3 variants, separated by |",
+        "missing": "description and at least one phrasing are required",
+    },
+    "zh": {
+        "ask_desc": "这个 skill 是干什么的？（一句话）",
+        "ask_say": "用户会怎么表达这个需求？输入 3 种说法，用 | 分隔",
+        "missing": "需要 description 和至少一种用户说法",
+    },
+}
+
+
 @app.command()
 def new(
     name: str = typer.Argument(..., help="skill name, kebab-case"),
@@ -59,19 +86,21 @@ def new(
     ),
     template: str = typer.Option("basic", "--template", "-t", help=f"one of: {', '.join(TEMPLATES)}"),
     out: Path = typer.Option(Path("."), "--out", "-o", help="parent directory"),
+    lang: Optional[str] = typer.Option(None, "--lang", help="prompt language: en / zh (default: system locale)"),
 ) -> None:
     """Scaffold a new skill directory interactively or from flags."""
     import questionary
 
     from .report import console
 
+    t = _PROMPTS[_pick_lang(lang)]
     if description is None:
-        description = questionary.text("这个 skill 是干什么的？（一句话）").ask() or ""
+        description = questionary.text(t["ask_desc"]).ask() or ""
     if not phrasings:
-        raw = questionary.text("用户会怎么表达这个需求？输入 3 种说法，用 | 分隔").ask() or ""
+        raw = questionary.text(t["ask_say"]).ask() or ""
         phrasings = [p.strip() for p in raw.split("|") if p.strip()]
     if not description.strip() or len(phrasings) < 1:
-        console.print("[bold red]description and at least one phrasing are required[/]")
+        console.print(f"[bold red]{t['missing']}[/]")
         raise typer.Exit(2)
 
     try:

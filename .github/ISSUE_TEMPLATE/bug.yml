@@ -1,0 +1,24 @@
+name: Bug report
+description: Something is broken
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you ran, what you expected, what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: skilldoctor version (`skilldoctor --version`), Python version, OS, and model/provider if LLM-related.
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample skill / cases
+      description: If routing-related, paste the skill description and failing case.
+      render: yaml

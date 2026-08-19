@@ -17,6 +17,15 @@ the numbers move.
 pip install skill-inspect     # or: uvx skill-inspect <cmd>  (zero install)
 ```
 
+<p align="center">
+  <img src="docs/improve.png" alt="skilldoctor improve: baseline 8/10 (67% trigger rate) → round 1 10/10 (100%)" width="760">
+</p>
+
+<p align="center"><em>
+One <code>improve</code> round on a naive description: trigger rate 67% → 100%, false positives 0%.
+Measured, not vibes.
+</em></p>
+
 ## Why not skillcheck / skillbench?
 
 The ecosystem already has good tools, but they answer different questions:
