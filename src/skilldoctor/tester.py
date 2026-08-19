@@ -28,7 +28,7 @@ DEFAULT_CASE_FILES = ("skilldoctor.cases.yml", "skilldoctor.cases.yaml", "cases.
 
 
 class TesterError(Exception):
-    pass
+    __test__ = False  # not a pytest test class despite the name
 
 
 @dataclass
@@ -54,6 +54,7 @@ class CaseResult:
 
 @dataclass
 class TestReport:
+    __test__ = False  # not a pytest test class despite the name
     skill_name: str
     results: list[CaseResult] = field(default_factory=list)
 
